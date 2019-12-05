@@ -24,3 +24,6 @@ Run the tests `npm test`
 ## Deploying
 
 When your new project is ready for deployment, add a new Heroku application with `heroku create`. This will make a new git remote called "heroku" and you can then `npm run deploy` which will push to this remote's master branch.
+
+db location 
+postgres://koqblbynfsbvns:3dbb8edc01954e78ca259e751945f913843d2a8d23215e2b63028c9f9aebbdc9@ec2-107-20-239-47.compute-1.amazonaws.com:5432/da8rv379j4i15k
