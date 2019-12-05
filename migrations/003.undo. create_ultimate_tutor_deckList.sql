@@ -1,1 +1,1 @@
-DROP TABLE IF EXISTS UT_decklist
+DROP TABLE IF EXISTS ut_decklist;
