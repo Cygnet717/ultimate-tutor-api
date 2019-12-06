@@ -8,8 +8,8 @@ TRUNCATE
 
 INSERT INTO ut_users (username, password)
 VALUES
-    ('administrator', 'administrator'),
-    ('testUser', 'testPassword');
+    ('administrator', 'Password1!'),
+    ('testUser', 'Password1!');
 
 INSERT INTO ut_decks (deck_name, user_id)
 VALUES
@@ -18,7 +18,7 @@ VALUES
 
 INSERT INTO ut_decklist (card_name, image_url, multiverseid, deck_id)
 VALUES
-    ('Start', 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=426917&type=card', 426917, 1),
-    ('Esper Charm', 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=137913&type=card', 137913, 1);
+    ('test card', 'https://i.imgur.com/oKvvagP.jpg?2', 426917, 1),
+    ('test card', 'https://i.imgur.com/oKvvagP.jpg?2', 137913, 1);
 
 COMMIT;
