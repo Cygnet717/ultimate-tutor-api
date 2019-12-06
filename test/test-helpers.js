@@ -6,17 +6,17 @@ function makeUsersArray() {
         {
             user_id: 5,
             username: 'testUser1',
-            password: 'Password1!',
+            password: '$2a$12$HqP.cYchhRJ7UKUe3kNxb.WJu8RXP7tN4dus0Om1TR2qP7HpJtGlC',
         },
         {
             user_id: 2,
             username: 'testUser2',
-            password: 'Password1!',
+            password: '$2a$12$HqP.cYchhRJ7UKUe3kNxb.WJu8RXP7tN4dus0Om1TR2qP7HpJtGlC',
         },
         {
             user_id: 3,
             username: 'testUser3',
-            password: 'Password1!',
+            password: '$2a$12$HqP.cYchhRJ7UKUe3kNxb.WJu8RXP7tN4dus0Om1TR2qP7HpJtGlC',
         },
     ]
 }
