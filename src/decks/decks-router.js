@@ -40,19 +40,18 @@ decksRouter
         .catch(next)
     })
     .delete(jsonBodyParser, (req, res, next) => {
-        const deck_id = req.body
+        const deck_id = req.body.deck_id
+        console.log(deck_id)
 
         if(!deck_id)
         return res.send(400).json({
             error: 'Missing deck Id'
         })
 
-        if(!decksService.deckExists(req.app.get('db'), deck_id))
-        return res.status(400).json({ error: 'deck does not exist'})
-
         decksService.deleteDeck(req.app.get('db'), deck_id)
-        return res.status(200).json({message: 'deleted'})
-
+        .then(deleted => {
+            res.status(200).json({message: 'deleted'})
+        })
         .catch(next)
     })
     

@@ -23,13 +23,6 @@ const decksService = {
         }
       },
 
-      deckExists(db, deck_id) {
-          return db('ut_decks')
-          .where({deck_id})
-          .first()
-          .then(deck => deck)
-      },
-
       deleteDeck(db, deck_id) {
           return db('ut_decks')
           .where({deck_id})
