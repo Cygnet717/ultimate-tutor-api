@@ -1,6 +1,5 @@
 const express = require('express')
 const AuthService = require('./auth-service')
-const config = require('../config')
 
 const authRouter = express.Router()
 const jsonBodyParser = express.json()
