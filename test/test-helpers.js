@@ -1,22 +1,23 @@
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const app = require('../src/app')
 
 function makeUsersArray() {
     return [
         {
             user_id: 5,
             username: 'testUser1',
-            password: '$2a$12$HqP.cYchhRJ7UKUe3kNxb.WJu8RXP7tN4dus0Om1TR2qP7HpJtGlC',
+            password: 'Password1!',
         },
         {
             user_id: 2,
             username: 'testUser2',
-            password: '$2a$12$HqP.cYchhRJ7UKUe3kNxb.WJu8RXP7tN4dus0Om1TR2qP7HpJtGlC',
+            password: 'Password1!',
         },
         {
             user_id: 3,
             username: 'testUser3',
-            password: '$2a$12$HqP.cYchhRJ7UKUe3kNxb.WJu8RXP7tN4dus0Om1TR2qP7HpJtGlC',
+            password: 'Password1!',
         },
     ]
 }
@@ -118,11 +119,19 @@ function seedUsers(db, users){
   //)
   }
 
+  function seedDecks(db, decks){
+    return db.into('ut_decks').insert(decks)
+  }
+
+  function seedCards(db, cards) {
+    return db.into('ut_decklist').insert(cards)
+  }
+
 function makeTestUsersFixtures() {
     const testUsers = makeUsersArray()
     const testDecks = makeDecksArray(testUsers)
-    const testDeckList = makeDeckListArray(testDecks)
-    return { testUsers, testDecks, testDeckList}
+    const testDeckLists = makeDeckListArray(testDecks)
+    return { testUsers, testDecks, testDeckLists}
   }
 
   function cleanTables(db) {
@@ -135,6 +144,17 @@ function makeTestUsersFixtures() {
     )
   }
 
+  function makeAuthHeader(user, secret = process.env.JWT_SECRET) {
+        
+    const user_id = user.user_id
+    const token = jwt.sign({ user_id: user_id }, secret, {
+      subject: user.username,
+      expiresIn:'8h',
+      algorithm: 'HS256'
+    })
+    return `Bearer ${token}`
+  }
+
   module.exports = {
     makeTestUsersFixtures,
     makeUsersArray,
@@ -142,4 +162,7 @@ function makeTestUsersFixtures() {
     makeDeckListArray,
     cleanTables,
     seedUsers,
+    seedDecks,
+    seedCards,
+    makeAuthHeader,
   }

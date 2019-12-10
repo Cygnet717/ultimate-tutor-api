@@ -3,12 +3,11 @@ const jwt = require('jsonwebtoken')
 const app = require('../src/app')
 const helpers = require('./test-helpers')
 
-describe.only('Auth Endpoints', function() {
+describe('Auth Endpoints', function() {
   let db
 
   const { testUsers } = helpers.makeTestUsersFixtures()
   const testUser = testUsers[0]
-  console.log(testUser)
 
   before('make knex instance', () => {
     db = knex({
@@ -69,16 +68,14 @@ describe.only('Auth Endpoints', function() {
     })
 
     it(`responds 200 and JWT auth token using secret when valid credentials`, () => {
-        const userValidCreds = {
-            user_name: testUser.username,
-            password: testUser.password,
-        }
+        const userValidCreds = { username: testUser.username, password: testUser.password}
+      
         const expectedToken = jwt.sign(
             {user_id: testUser.user_id}, //payload
             process.env.JWT_SECRET,
             {
                 subject: testUser.username,
-                expiresIn:'20s',
+                expiresIn:'8h',
                 algorithm: 'HS256',
             }
         )
