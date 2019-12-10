@@ -41,7 +41,6 @@ decksRouter
     })
     .delete(jsonBodyParser, (req, res, next) => {
         const deck_id = req.body.deck_id
-        console.log(deck_id)
 
         if(!deck_id)
         return res.send(400).json({
@@ -59,7 +58,38 @@ decksRouter
 
 decksRouter
     .route('/:deck_id')
+    .all(requireAuth)
+    .get((req, res, next) => {
+        const userId = req.user.user_id
+        const deck_id = req.params.deck_id
+        
+        decksService.getAllCards(req.app.get('db'), deck_id)
+        .then(cards => {
+            res.json(cards)
+        })
+        .catch(next)
+    })
+    .post(jsonBodyParser, (req, res, next) => {
+        const {card_name, image_url, multiverseid, deck_id} = req.body
+        const newCard = {card_name, image_url, multiverseid, deck_id}
 
+        decksService.insertCardInDeck(req.app.get('db'), newCard, newCard.deck_id)
+        .then(card => {
+            res
+            .status(201)
+            .json(card)
+        })
+        .catch(next)
+    })
+    .delete(jsonBodyParser, (req, res, next) => {
+        const card_id = req.body.card_id
+
+        decksService.deleteCard(req.app.get('db'), card_id)
+        .then(deleted => {
+            res.status(200).json({message: 'deleted'})
+        })
+        .catch(next)
+    })
 
 
 module.exports = decksRouter

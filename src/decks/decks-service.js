@@ -27,7 +27,29 @@ const decksService = {
           return db('ut_decks')
           .where({deck_id})
           .delete()
-      }
+      },
+//services for cards
+      getAllCards(db, deck_id) {
+        return db
+        .select('*')
+        .from('ut_decklist')
+        .where('deck_id', deck_id)
+    },
+
+    insertCardInDeck(db, newCard, deck_id) {
+        return db
+        .insert(newCard)
+        .into('ut_decklist')
+        .where('deck_id', deck_id)
+        .returning('*')
+        .then(([user]) => user)
+    },
+
+    deleteCard(db, card_id) {
+        return db('ut_decklist')
+        .where({card_id})
+        .delete()
+    },
 }
 
 module.exports = decksService
