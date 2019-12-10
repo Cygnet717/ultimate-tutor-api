@@ -26,15 +26,15 @@ app.use('/api/users', usersRouter)
 app.use('/api/auth', authRouter)
 app.use('/api/decks', decksRouter)
 
-/*app.use(function errorHandler(error, req, res, next){
+app.use(function errorHandler(error, req, res, next){
     let response
-    if (NODE_ENV !== 'production'){
+    if (NODE_ENV === 'production'){
         response = {error: {message: 'server error'}}
     } else {
         console.error(error)
         response = { Message: error.message, error}
     }
     res.status(500).json(response)
-})*/
+})
 
 module.exports = app
