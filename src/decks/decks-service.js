@@ -36,11 +36,10 @@ const decksService = {
         .where('deck_id', deck_id)
     },
 
-    insertCardInDeck(db, newCard, deck_id) {
+    insertCardInDeck(db, newCard) {
         return db
         .insert(newCard)
         .into('ut_decklist')
-        .where('deck_id', deck_id)
         .returning('*')
         .then(([user]) => user)
     },

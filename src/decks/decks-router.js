@@ -73,7 +73,7 @@ decksRouter
         const {card_name, image_url, multiverseid, deck_id} = req.body
         const newCard = {card_name, image_url, multiverseid, deck_id}
 
-        decksService.insertCardInDeck(req.app.get('db'), newCard, newCard.deck_id)
+        decksService.insertCardInDeck(req.app.get('db'), newCard)
         .then(card => {
             res
             .status(201)
