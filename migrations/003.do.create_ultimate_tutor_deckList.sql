@@ -3,5 +3,5 @@ CREATE TABLE ut_decklist (
     card_name TEXT NOT NULL,
     image_url TEXT NOT NULL,
     multiverseid INTEGER NOT NULL,
-    deck_id INTEGER REFERENCES ut_decks(deck_id) ON DELETE SET NULL
+    deck_id INTEGER REFERENCES ut_decks(deck_id) ON DELETE CASCADE
 );

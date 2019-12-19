@@ -149,7 +149,7 @@ function makeTestUsersFixtures() {
     const user_id = user.user_id
     const token = jwt.sign({ user_id: user_id }, secret, {
       subject: user.username,
-      expiresIn:'8h',
+      expiresIn:'3h',
       algorithm: 'HS256'
     })
     return `Bearer ${token}`

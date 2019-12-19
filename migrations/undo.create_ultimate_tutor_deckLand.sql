@@ -1,0 +1,6 @@
+ALTER TABLE ut_decks
+DROP COLUMN white,
+DROP COLUMN blue,
+DROP COLUMN black,
+DROP COLUMN red,
+DROP COLUMN green;
