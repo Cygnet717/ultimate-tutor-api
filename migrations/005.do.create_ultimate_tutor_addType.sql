@@ -1,0 +1,2 @@
+ALTER TABLE ut_decklist
+ADD COLUMN type TEXT;

@@ -70,8 +70,8 @@ decksRouter
         .catch(next)
     })
     .post(jsonBodyParser, (req, res, next) => {
-        const {card_name, image_url, multiverseid, deck_id} = req.body
-        const newCard = {card_name, image_url, multiverseid, deck_id}
+        const {card_name, image_url, multiverseid, deck_id, type} = req.body
+        const newCard = {card_name, image_url, multiverseid, deck_id, type}
 
         decksService.insertCardInDeck(req.app.get('db'), newCard)
         .then(card => {
