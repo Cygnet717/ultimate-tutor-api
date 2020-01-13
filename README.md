@@ -1,29 +1,235 @@
-# Express Boilerplate!
+# Ultimate Tutor
+http://ultimatetutor.herokuapp.com/
 
-This is a boilerplate project used for starting new projects!
 
-## Set up
+## Summary
+This app makes it easy to build new decks and make online versions of existing decks.  The user can create new decks and search for cards to add to thier deck.  Future deployments will include the ability to add many coppies of a card at once and to random draw a number of cards from your deck to test the first hand you might get in a game.
 
-Complete the following steps to start a new project (NEW-PROJECT-NAME):
+## API Documentation
+### Getting Started
+To use API endpoints:
+https://ultimatetutor-api.herokuapp.com/api
 
-1. Clone this repository to your local machine `git clone BOILERPLATE-URL NEW-PROJECTS-NAME`
-2. `cd` into the cloned repository
-3. Make a fresh start of the git history for this project with `rm -rf .git && git init`
-4. Install the node dependencies `npm install`
-5. Move the example Environment file to `.env` that will be ignored by git and read by the express server `mv example.env .env`
-6. Edit the contents of the `package.json` to use NEW-PROJECT-NAME instead of `"name": "express-boilerplate",`
+#### EndPoints
+**/**
+>Test
+Response 
 
-## Scripts
+    [
+        {"Hello, world!"}
+    ]
+    
 
-Start the application `npm start`
 
-Start nodemon for the application `npm run dev`
+**/users**  POST
+>Adds a new user
 
-Run the tests `npm test`
+Send 
 
-## Deploying
+    [
+        {"username": "Picard", "password": "Makeitso#1"}
+    ]
 
-When your new project is ready for deployment, add a new Heroku application with `heroku create`. This will make a new git remote called "heroku" and you can then `npm run deploy` which will push to this remote's master branch.
 
-db location 
-postgres://koqblbynfsbvns:3dbb8edc01954e78ca259e751945f913843d2a8d23215e2b63028c9f9aebbdc9@ec2-107-20-239-47.compute-1.amazonaws.com:5432/da8rv379j4i15k
+*username must be unique, password must contain 8 characters long and inclue Capital, number, and one of #?!@$%^&*-
+
+Response  
+
+    [
+        {user_id: 99, username: "Picard"}
+    ]
+
+
+
+**/auth/login**  POST
+>Logsin user
+
+Send 
+
+    [
+        {"username": "Picard", "password": "Makeitso#1"}
+    ]
+
+Response 
+
+    [
+        {"authToken": *token*, "user_id": 99}
+    ]
+
+
+
+**/decks/**   GET
+>Gets all decks a user has made
+
+Send 
+
+    [
+        {"user_id": 99}
+    ]
+
+Response 
+
+    [
+        {
+            "deck_id": 100,
+            "deck_name": "Birds",
+            "user_id": 99,
+            "white": null,
+            "blue": null,
+            "black": null,
+            "red": null,
+            "green": null
+        }
+    ]
+
+*columns white, blue, black, red, green are for future use
+
+
+
+**/decks/**   POST
+>adds a deck to a users account
+
+Send 
+
+    [
+        {"user_id": 99, "deck_name": "The Enterprise"}
+    ]
+
+Response 
+
+    [
+        {
+            "deck_id": 115,
+            "deck_name": "The Enterprise",
+            "user_id": 99,
+            "white": null,
+            "blue": null,
+            "black": null,
+            "red": null,
+            "green": null
+        }
+    ]
+
+*columns white, blue, black, red, green are for future use
+
+
+
+**/decks/**  DELETE
+>Deletes deck from users account
+
+Send
+
+    [
+        {"deck_id": 100}
+    ]
+    
+Response
+
+    [
+        {message: "deleted"}
+    ]
+
+
+
+**/decks/:deck_id**  GET
+>Get all cards in a deck
+
+Send
+
+    [
+        {"deck_id": 115}
+    ]
+
+Response
+
+    [
+        {
+            "card_id": 159,
+            "card_name": "Abundance",
+            "image_url": "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=130483&type=card",
+            "multiverseid": 130483,
+            "deck_id": 78,
+            "type": "Enchantment"
+        },
+        {
+            "card_id": 160,
+            "card_name": "Ancestor"s Chosen",
+            "image_url": "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=130550&type=card",
+            "multiverseid": 130550,
+            "deck_id": 78,
+            "type": "Creature"
+        }
+    ]
+
+
+
+**/decks/:deck_id**  POST
+>Add card to existing deck
+
+Send
+
+    [
+        {
+            "card_name": "Caves of Koilos",
+            "image_url": "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=129497&type=card",
+            "multiverseid": 129497,
+            "deck_id": "78",
+            "type": "Land"
+        }
+    ]
+
+Response
+
+    [
+        {
+            "card_id": 288,
+            "card_name": "Caves of Koilos",
+            "image_url": "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=129497&type=card",
+            "multiverseid": 129497,
+            "deck_id": 78,
+            "type": "Land"
+        }
+    ]
+
+
+
+**/decks/:deck_id** DELETE
+>Removes a card from a deck
+
+Send
+
+    [
+        {"card_id": 288}
+    ]
+
+Response
+
+    [
+        {message: "deleted"}
+    ]
+
+
+
+## Screenshots
+### Landing Page
+![Landing Page](/ScreenShots/LandingPage.png "Landing Page")
+
+### Decks View Page
+![Decks View Page](/ScreenShots/DeckViewPage.png "Decks View Page")
+
+### Deck ListView Page
+![Deck ListView Page](/ScreenShots/DeckListPage.png "Deck ListView Page")
+
+### Deck CardView Page
+![Deck CardView Page](/ScreenShots/DeckListCardPage.png "Deck CardView Page")
+
+### Search Page
+![Search Page](/ScreenShots/SearchPage.png "Search Page")
+
+### Results Page
+![Results Page](/ScreenShots/ResultsPage.png "Results Page")
+
+## Technology used
+HTML, CSS, javaScript, React
+For the card search Magic: The Gathering - Developers API was used 
+https://magicthegathering.io/ 

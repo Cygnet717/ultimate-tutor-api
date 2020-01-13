@@ -60,7 +60,6 @@ decksRouter
     .route('/:deck_id')
     .all(requireAuth)
     .get((req, res, next) => {
-        const userId = req.user.user_id
         const deck_id = req.params.deck_id
         
         decksService.getAllCards(req.app.get('db'), deck_id)
