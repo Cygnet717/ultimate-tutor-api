@@ -49,6 +49,6 @@ const decksService = {
         .where({card_id})
         .delete()
     },
-}
+};
 
 module.exports = decksService

@@ -1,10 +1,10 @@
-const express = require('express')
-const path = require('path')
-const decksService = require('./decks-service')
-const { requireAuth } = require('../middleware/jwt-auth')
+const express = require('express');
+const path = require('path');
+const decksService = require('./decks-service');
+const { requireAuth } = require('../middleware/jwt-auth');
 
-const decksRouter = express.Router()
-const jsonBodyParser = express.json()
+const decksRouter = express.Router();
+const jsonBodyParser = express.json();
 
 decksRouter
     .route('/')
@@ -54,8 +54,6 @@ decksRouter
         .catch(next)
     })
     
-    
-
 decksRouter
     .route('/:deck_id')
     .all(requireAuth)
@@ -89,6 +87,5 @@ decksRouter
         })
         .catch(next)
     })
-
 
 module.exports = decksRouter

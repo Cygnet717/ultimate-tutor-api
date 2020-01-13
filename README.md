@@ -231,5 +231,6 @@ Response
 
 ## Technology used
 HTML, CSS, javaScript, React
+
 For the card search Magic: The Gathering - Developers API was used 
 https://magicthegathering.io/ 

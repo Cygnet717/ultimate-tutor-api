@@ -1,9 +1,9 @@
-const express = require('express')
-const path = require('path')
-const UsersService = require('./users-service')
+const express = require('express');
+const path = require('path');
+const UsersService = require('./users-service');
 
-const usersRouter = express.Router()
-const jsonBodyParser = express.json()
+const usersRouter = express.Router();
+const jsonBodyParser = express.json();
 
 usersRouter
     .post('/', jsonBodyParser, (req, res, next) => {
@@ -13,7 +13,7 @@ usersRouter
         if (!req.body[field])
           return res.status(400).json({
               error: `Missing '${field}' in request body`
-          })
+            })
 
         const passwordError = UsersService.validatePassword(password)
 
@@ -43,10 +43,8 @@ usersRouter
                 .status(201)
                 .location(path.posix.join(req.originalUrl, `./${user.user_id}`))
                 .json(UsersService.serializeUser(user))
+                })
             })
-            
-        })
-            
         })
         .catch(next)
     })
