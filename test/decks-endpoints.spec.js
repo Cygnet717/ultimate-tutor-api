@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken')
 const app = require('../src/app')
 const helpers = require('./test-helpers')
 
-describe.only('Decks Endpoints', () => {
+describe.skip('Decks Endpoints', () => {
     let db
 
   const { testUsers, testDecks, testDeckLists } = helpers.makeTestUsersFixtures()

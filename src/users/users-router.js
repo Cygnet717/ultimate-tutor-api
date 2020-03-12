@@ -32,17 +32,17 @@ usersRouter
             .then(hashedPassword => {const newUser = {
                 username,
                 password: hashedPassword,
-            }
+                }
 
-            return UsersService.insertUser(
-                req.app.get('db'),
-                newUser
-            )
-            .then(user => {
-                res
-                .status(201)
-                .location(path.posix.join(req.originalUrl, `./${user.user_id}`))
-                .json(UsersService.serializeUser(user))
+                return UsersService.insertUser(
+                    req.app.get('db'),
+                    newUser
+                )
+                .then(user => {
+                    res
+                    .status(201)
+                    .location(path.posix.join(req.originalUrl, `./${user.user_id}`))
+                    .json(UsersService.serializeUser(user))
                 })
             })
         })
